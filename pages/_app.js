@@ -1,7 +1,24 @@
-import '../styles/globals.css'
+import { withTina } from "tinacms";
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+function App({ Component, pageProps }) {
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+function Button() {
+  return <button onClick={() => alert("Good day to ya")}>Hello</button>;
+}
+
+export const Widget = {
+  __type: "toolbar:widget",
+  name: "button",
+  weight: 5,
+  component: Button,
+};
+
+export default withTina(App, {
+  enabled: true,
+  sidebar: true,
+  toolbar: true,
+  plugins: [Widget],
+});
